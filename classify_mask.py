@@ -1,3 +1,7 @@
+'''
+这样产生的mask的flist是每组2000张，然后手动复制5次，直10000张。
+'''
+
 import os
 from imageio import imread
 from PIL import Image
