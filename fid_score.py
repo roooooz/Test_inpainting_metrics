@@ -29,11 +29,11 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 import torch
 import numpy as np
-from scipy.misc import imread
+from imageio import imread
 from scipy import linalg
 from torch.autograd import Variable
 from torch.nn.functional import adaptive_avg_pool2d
-
+from PIL import Image
 from inception import InceptionV3
 
 
@@ -192,7 +192,24 @@ def _compute_statistics_of_path(path, model, batch_size, dims, cuda):
         path = pathlib.Path(path)
         files = list(path.glob('*.jpg')) + list(path.glob('*.png'))
 
-        imgs = np.array([imread(str(fn)).astype(np.float32) for fn in files])
+        #imgs = np.array([np.array(Image.open(str(fn)).convert('RGB'), dtype=np.float32).resize((256, 256)) for fn in files])
+        # imgs = np.array([np.array(imread(str(fn)), dtype=np.float32) for fn in files])
+
+        imgs = []
+        for fn in files:
+            img = Image.open(str(fn)).convert('RGB')
+            img = img.resize((256, 256))   # 设置图像放缩大小
+            img = np.asarray(img)  # H W C
+            img = img.astype(np.float32)
+            imgs.append(img)
+
+        imgs = np.array(imgs)
+
+        # print("imgs", imgs.shape)
+        # print(type(imgs))
+        #
+        # print("imgs[0]", imgs[0].shape)
+        # print(type(imgs[0]))
 
         # Bring images to shape (B, 3, H, W)
         imgs = imgs.transpose((0, 3, 1, 2))
