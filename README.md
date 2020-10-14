@@ -4,7 +4,7 @@ The steps of test the inpainting metrics of irregular holes.
 
 The Irregular Mask Dataset used for test can be download publically from the [website](https://nv-adlr.github.io/publication/partialconv-inpainting).
 
-The test procedure is referred to [edge-connect](https://arxiv.org/abs/1901.00212), which we devide into several groups according to the relative masked area ratio: 0~10%, 10%~20%, 20%~30%, 30%~40%, 40%~50%, 50%~60%. Since the provided testset contains 12,000 mask images totally, each groups only contain 2,000 images. For test experiment, we will randomly select 10,000 test images as the testset. To make the number of each groups consistent to the number of testset, we extend the number of each mask groups to 10,000 by duplicating 5 times.
+The test procedure is referred to [edge-connect](https://arxiv.org/abs/1901.00212), in which we devide into several groups according to the relative masked area ratio: 0~10%, 10%~20%, 20%~30%, 30%~40%, 40%~50%, 50%~60%. Since the provided testset contains 12,000 mask images totally, each groups only contain 2,000 images. For test experiment, we will randomly select 10,000 test images as the testset. To make the number of each groups consistent to the number of testset, we extend the number of each mask groups to 10,000 by duplicating 5 times.
 
 ### The details of the test procedure:
 
